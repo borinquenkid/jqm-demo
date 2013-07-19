@@ -8,7 +8,8 @@ require.config( {
             "jquery": "libs/jquery",
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
-            "backbone": "libs/backbone"
+            "backbone": "libs/backbone",
+            "modernizr":"libs/modernizr"
 
       },
 
@@ -18,6 +19,9 @@ require.config( {
             "backbone": {
                   "deps": [ "underscore", "jquery" ],
                   "exports": "Backbone"  //attaches "Backbone" to the window object
+            },
+            "modernizr": {
+                "exports": 'Modernizr'
             }
 
       } // end Shim Configuration
@@ -25,7 +29,7 @@ require.config( {
 } );
 
 // Includes File Dependencies
-require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone, Mobile ) {
+require([ "jquery", "backbone", "routers/mobileRouter","modernizr" ], function( $, Backbone, Mobile ) {
 
 	$( document ).on( "mobileinit",
 		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
