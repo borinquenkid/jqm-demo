@@ -39,10 +39,28 @@ require([ "jquery", "backbone", "routers/mobileRouter","modernizr" ], function( 
 
 			// Disabling this will prevent jQuery Mobile from handling hash changes
 			$.mobile.hashListeningEnabled = false;
+			
+			   // can cause calling object creation twice and back button issues are solved
+			   $.mobile.ajaxEnabled = false;
+			   // Otherwise after mobileinit, it tries to load a landing page
+			   $.mobile.autoInitializePage = false;
+			   // we want to handle caching and cleaning the DOM ourselves
+			   $.mobile.page.prototype.options.domCache = false;
+
+			// consider due to compatibility issues
+			   // not supported by all browsers
+			   $.mobile.pushStateEnabled = false;
+			   // Solves phonegap issues with the back-button
+			   $.mobile.phonegapNavigationEnabled = true;
+			   //no native datepicker will conflict with the jQM component
+			   $.mobile.page.prototype.options.degradeInputs.date = true;
 		}
-	)
+	);
 
 	require( [ "jquerymobile" ], function() {
+		if ( $.mobile.autoInitializePage == false){
+            $.mobile.initializePage();
+        }
 		// Instantiates a new Backbone.js Mobile Router
 		this.router = new Mobile();
 	});
