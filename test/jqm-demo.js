@@ -17,17 +17,17 @@
  * @fileoverview An example test that may be run using Mocha. To run, you must
  * have the chromedriver installed on the system PATH.
  */
+var WDROOT = '../node_modules/selenium-webdriver';
 
-var assert = require('assert'),
+var assert = require(WDROOT+'/testing/assert'),
     fs = require('fs');
 
-var WDROOT = '../node_modules/selenium-webdriver';
 var webdriver = require(WDROOT),
     By = require(WDROOT).By,
     test = require(WDROOT+'/lib/test'),
     remote = require(WDROOT+'/remote');
-test.suite(function(env) {
-	var browsers = env.browsers;
+    test.suite(function(env) {
+//	var browsers = env.browsers;
 	
 	var driver;
 	beforeEach(function() { driver = env.driver; });
@@ -36,14 +36,15 @@ test.suite(function(env) {
 	  test.it('should find title', function() {
 		    driver.get('http://192.168.1.132:9001/backbone-require.html');
 		    driver.wait(function() {
-		    return driver.findElement(By.tagName('title')).then(function(title) {
-		    	console.log(title);
-		        return true;
-		      });
+		    	return driver.executeScript("return !($.mobile === undefined) ;");
 		    }, 5000);
+			driver.getTitle().then(function(title) {
+			  return assert("Categories").equalTo(title);
+    	    });
 		  });
 
 		});
+	
 
 });
 
