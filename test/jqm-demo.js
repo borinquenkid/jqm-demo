@@ -30,20 +30,34 @@ var webdriver = require(WDROOT),
 //	var browsers = env.browsers;
 	
 	var driver;
-	beforeEach(function() { driver = env.driver; });
+	beforeEach(function() { 
+		driver = env.driver; 
+		 driver.get('http://192.168.1.132:9001/backbone-require.html');
+		 driver.wait(function() {
+		    	return driver.executeScript("return !($.mobile === undefined) ;");
+		 }, 5000);
+	});
 	
 	describe('JQM Demo', function() {
 	  test.it('should find title', function() {
-		    driver.get('http://192.168.1.132:9001/backbone-require.html');
-		    driver.wait(function() {
-		    	return driver.executeScript("return !($.mobile === undefined) ;");
-		    }, 5000);
 			driver.getTitle().then(function(title) {
 			  return assert("Categories").equalTo(title);
     	    });
 		  });
+	  test.it('find all the elements below the body',
+		      function() {
+		    driver.findElement(By.tagName('body')).findElements(By.xpath('.//*')).then(function(elements){
+		    	elements.forEach(function(element,index){
+		    		element.getTagName().then(function(name){
+		    			console.log("index"+ index + ":" + name);
+		    		});
+			    });
+		    });
+		  });
 
 		});
+	
+	 
 	
 
 });
