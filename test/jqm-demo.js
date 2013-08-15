@@ -27,8 +27,22 @@ var webdriver = require(WDROOT),
     test = require(WDROOT+'/lib/test'),
     remote = require(WDROOT+'/remote');
     test.suite(function(env) {
-//	var browsers = env.browsers;
-	
+
+var waitFor = function(driver,locator,timeout) {
+	  timeout = timeout || 5000;
+	  var deferred = webdriver.promise.defer();
+	  driver.wait(function() {
+		  return driver.isElementPresent(locator);
+	   }, timeout).then( function(){
+		   return driver.wait(function() {
+			   return driver.findElement(locator).isDisplayed();
+		   });
+	   }).then( deferred.fulfill);
+	  return deferred;
+};
+
+
+			 
 	var driver;
 	beforeEach(function() { 
 		driver = env.driver; 
@@ -36,9 +50,13 @@ var webdriver = require(WDROOT),
 		 driver.wait(function() {
 		    	return driver.executeScript("return !($.mobile === undefined) ;");
 		 }, 5000);
+		 
 	});
 	
+
+	
 	describe('JQM Demo', function() {
+		
 	  test.it('should find title', function() {
 			driver.getTitle().then(function(title) {
 			  return assert("Categories").equalTo(title);
@@ -54,8 +72,13 @@ var webdriver = require(WDROOT),
 			    });
 		    });
 		  });
-
-		});
+	  test.it('find element being visible', function() {
+		   waitFor(driver,By.id('categories')).then(function() {
+			   console.log("The element is visible: ");
+		   });
+	     });
+	     
+	});
 	
 	 
 	
