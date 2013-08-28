@@ -36,8 +36,10 @@ var waitFor = function (driver, locator, timeout) {
 
 		  test.before(function() {
 				 driver = new webdriver.Builder().
-		         withCapabilities(capabilities['android']).
-		         usingServer('http://localhost:8080/wd/hub').
+		         withCapabilities(webdriver.Capabilities.chrome().set('chromeOptions', {
+		        	 'androidPackage': 'com.android.chrome'
+		           })).
+		         usingServer('http://localhost:9515/wd/hub').
 		         build();
 				 driver.get('http://192.168.1.132:9001/backbone-require.html');
 			     driver.wait(function () {
