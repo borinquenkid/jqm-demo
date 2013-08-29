@@ -7,12 +7,13 @@
     emulator -avd <avd> -partition-size 512
 6) Get device id
    adb devices
-7) Install Android WebDriver
-   adb -s <serialId> -e install -r  android-server.apk
+7) export SERIAL_ID=<device id>
+8) Install Android WebDriver
+   adb -s $SERIAL_ID -e install -r  android-server.apk
 8) Start the application in debug mode, which has more verbose logs by doing:
-    adb -s <serialId> shell am start -a android.intent.action.MAIN -n org.openqa.selenium.android.app/.MainActivity -e debug true
+    adb -s $SERIAL_ID shell am start -a android.intent.action.MAIN -n org.openqa.selenium.android.app/.MainActivity -e debug true
 9) Setup the port forwarding in order to forward traffic from the host machine to the emulator. In a terminal type:
-   adb -s <serialId> forward tcp:8080 tcp:8080
+   adb -s $SERIAL_ID forward tcp:8080 tcp:8080
 10) adb remount
 11) adb pull /system/etc/hosts hosts
 12) edit the hosts file adding an entry pointing to your host computer:
