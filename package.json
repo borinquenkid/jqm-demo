@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "description": "Demo of JQM with Backbone",
   "devDependencies": {
-    "grunt-contrib-connect": "~0.3.0",
-    "selenium-webdriver": "~2.35"
+    "grunt-contrib-connect": ">=0.3.0",
+    "selenium-webdriver": "2.x"
   },
   "author": "Walter Duque de Estrada",
   "license": "BSD"

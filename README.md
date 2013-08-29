@@ -25,19 +25,30 @@
 
 #CHROMIUM AVD SETUP
 1) Download GoogleAPI from http://goo.im/gapps for avd and extract
-
+2) edit .profile
 export AVD_HOME=/Users/wdeestrada/Projects/AndroidAVDRepo
 export AVD_NAME=Nexus-4i
 export API_LEVEL=17
 export GAPPS_PACKAGE_PATH=/Users/wdeestrada/Downloads/android_apps/gapps-jb-20130812-signed
 
-Copy default image to avd directory
+3) Copy default image to avd directory
 cp $ANDROID_SDK_HOME/system-images/android-$API_LEVEL/x86/system.img $AVD_HOME/avd/$AVD_NAME.avd/system.img
 
-Create read/write system image
+4) Create read/write system image
 $ANDROID_SDK_HOME/tools/emulator -avd $AVD_NAME -qemu -nand system,size=0x1f400000,file=$AVD_HOME/avd/$AVD_NAME.avd/system.img
 
-Add Google Play to read/write system image
+5) Add Google Play to read/write system image
 cd $GAPPS_PACKAGE_PATH/system/app;$ANDROID_SDK_HOME/platform-tools/adb remount && for file in GoogleLoginService.apk GoogleServicesFramework.apk Phonesky.apk; do $ANDROID_SDK_HOME/platform-tools/adb push $file /system/app; done
 
-Install Chrome from GooglePlay
+6) Install Chrome from GooglePlay inside of emulator
+7) Install ChromeDriver 
+https://code.google.com/p/chromedriver/downloads/list
+8) Run chromedriver
+
+#IOS SIMULATOR SEUP
+1) Install XCode and IphoneSimulator 6.0 or greater
+2) Download ios-driver https://s3-eu-west-1.amazonaws.com/ios-driver/ios-server-0.6.0.jar
+3) sudo chmod 666 /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator*.sdk/Applications/MobileSafari.app/Info.plist
+4) java -jar ios-server-0.6.0.jar
+
+
