@@ -44,7 +44,7 @@ cd $GAPPS_PACKAGE_PATH/system/app;$ANDROID_SDK_HOME/platform-tools/adb remount &
 6) Install Chrome from GooglePlay inside of emulator
 7) Install ChromeDriver 
 https://code.google.com/p/chromedriver/downloads/list
-8) Run chromedriver
+8) Run  chromedriver --url-base=/wd/hub
 
 #IOS SIMULATOR SEUP
 1) Install XCode and IphoneSimulator 6.0 or greater
