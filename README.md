@@ -22,8 +22,9 @@ This project tests a sample JQueryMobile web-app using Selenium WebDriver js bin
 
 ##CHROMIUM AVD SETUP
 1. Download GoogleAPI from http://goo.im/gapps for avd and extract
+2. Checkout from github AndroidAVDRepo https://github.com/j5at/AndroidAVDRepo.git
 2. edit .profile
-`export AVD_HOME=/Users/wdeestrada/Projects/AndroidAVDRepo
+`export AVD_HOME=<path to checkout of AndroidAVDRepo>
 export AVD_NAME=Nexus-4i
 export API_LEVEL=17
 export GAPPS_PACKAGE_PATH=<PATH_TO_GOOGLE_API_DOWNLOAD>/gapps-jb-20130812-signed
